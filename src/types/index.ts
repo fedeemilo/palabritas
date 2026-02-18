@@ -1,6 +1,6 @@
 export interface Word {
   word: string;
-  imageUrl: string;
+  emoji: string;
   difficulty: number;
 }
 

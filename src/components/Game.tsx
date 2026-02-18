@@ -1,10 +1,9 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import Image from 'next/image';
 import { WordsData } from '@/types';
 import { useGameProgress } from '@/hooks/useGameProgress';
-import ImageDisplay from './ImageDisplay';
+import EmojiDisplay from './EmojiDisplay';
 import WordDisplay from './WordDisplay';
 import UserInput from './UserInput';
 import SuccessAnimation from './SuccessAnimation';
@@ -34,7 +33,6 @@ export default function Game() {
 
   const words = data[currentLevel];
   const currentWord = words[currentWordIndex];
-  const nextWord = words[currentWordIndex + 1];
   const isCurrentCompleted = isWordCompleted(currentLevel, currentWordIndex);
   const levelStats = getLevelStats(currentLevel);
 
@@ -116,12 +114,11 @@ export default function Game() {
 
       {/* Main content - centered vertically */}
       <div className="flex flex-col items-center gap-6 md:gap-8 w-full max-w-xl">
-        {/* Image with completed badge */}
+        {/* Emoji with completed badge */}
         <div className="relative">
-          <ImageDisplay
-            imageUrl={currentWord.imageUrl}
+          <EmojiDisplay
+            emoji={currentWord.emoji}
             word={currentWord.word}
-            priority={true}
           />
 
           {/* Completed badge */}
@@ -143,19 +140,6 @@ export default function Game() {
             </div>
           )}
         </div>
-
-        {/* Preload next image */}
-        {nextWord && (
-          <div className="hidden">
-            <Image
-              src={nextWord.imageUrl}
-              alt=""
-              width={1}
-              height={1}
-              priority={false}
-            />
-          </div>
-        )}
 
         {/* Target word */}
         <WordDisplay word={currentWord.word} />
