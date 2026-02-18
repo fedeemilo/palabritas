@@ -1,16 +1,21 @@
 'use client';
 
-import { useState, useCallback } from 'react';
-import { WordsData } from '@/types';
+import { useState, useCallback, useEffect } from 'react';
+import { WordsData, Level } from '@/types';
 import { useGameProgress } from '@/hooks/useGameProgress';
+import { useSound } from '@/hooks/useSound';
 import EmojiDisplay from './EmojiDisplay';
 import WordDisplay from './WordDisplay';
 import UserInput from './UserInput';
 import SuccessAnimation from './SuccessAnimation';
+import LevelCompleteModal from './LevelCompleteModal';
 import ProgressIndicator from './ProgressIndicator';
 import LevelSelector from './LevelSelector';
 import ResetButton from './ResetButton';
+import SoundToggle from './SoundToggle';
 import wordsData from '@/data/words.json';
+
+const LEVELS: Level[] = ['nivel1', 'nivel2', 'nivel3'];
 
 export default function Game() {
   const data = wordsData as WordsData;
@@ -22,19 +27,34 @@ export default function Game() {
     isWordCompleted,
     markWordCompleted,
     isLevelUnlocked,
+    isLevelComplete,
     getLevelStats,
     setCurrentLevel,
     setCurrentWordIndex,
     resetProgress
   } = useGameProgress(data);
 
+  const {
+    enabled: soundEnabled,
+    toggle: toggleSound,
+    playKeyCorrect,
+    playKeyWrong,
+    playWordComplete,
+    playLevelComplete
+  } = useSound();
+
   const [userInput, setUserInput] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showLevelComplete, setShowLevelComplete] = useState(false);
+  const [completedLevel, setCompletedLevel] = useState<number>(1);
 
   const words = data[currentLevel];
   const currentWord = words[currentWordIndex];
   const isCurrentCompleted = isWordCompleted(currentLevel, currentWordIndex);
   const levelStats = getLevelStats(currentLevel);
+
+  const currentLevelIndex = LEVELS.indexOf(currentLevel);
+  const isLastLevel = currentLevelIndex === LEVELS.length - 1;
 
   const handleLevelChange = (level: typeof currentLevel) => {
     setCurrentLevel(level);
@@ -43,34 +63,58 @@ export default function Game() {
 
   const handleWordComplete = useCallback(() => {
     markWordCompleted(currentLevel, currentWordIndex);
+    playWordComplete();
     setShowSuccess(true);
-  }, [currentLevel, currentWordIndex, markWordCompleted]);
+  }, [currentLevel, currentWordIndex, markWordCompleted, playWordComplete]);
 
   const handleSuccessComplete = useCallback(() => {
     setShowSuccess(false);
     setUserInput('');
-  }, []);
+
+    // Check if level is now complete after this word
+    const stats = getLevelStats(currentLevel);
+    if (stats.completed === stats.total) {
+      setCompletedLevel(LEVELS.indexOf(currentLevel) + 1);
+      setShowLevelComplete(true);
+    } else {
+      // Auto-advance to next word
+      const totalWords = data[currentLevel].length;
+      if (currentWordIndex < totalWords - 1) {
+        setCurrentWordIndex(currentWordIndex + 1);
+      }
+    }
+  }, [currentLevel, currentWordIndex, data, getLevelStats, setCurrentWordIndex]);
+
+  const handleLevelModalContinue = () => {
+    setShowLevelComplete(false);
+
+    if (!isLastLevel) {
+      const nextLevel = LEVELS[currentLevelIndex + 1];
+      setCurrentLevel(nextLevel);
+    } else {
+      // All levels complete - restart
+      setCurrentLevel('nivel1');
+      setCurrentWordIndex(0);
+    }
+    setUserInput('');
+  };
 
   const handleNextWord = () => {
     if (currentWordIndex < words.length - 1) {
       setCurrentWordIndex(currentWordIndex + 1);
       setUserInput('');
     } else {
-      // Level complete - try to go to next level
-      const levels = ['nivel1', 'nivel2', 'nivel3'] as const;
-      const currentLevelIndex = levels.indexOf(currentLevel);
-
-      if (currentLevelIndex < levels.length - 1) {
-        const nextLevel = levels[currentLevelIndex + 1];
-        if (isLevelUnlocked(nextLevel)) {
-          setCurrentLevel(nextLevel);
+      // At last word - check if level complete
+      if (isLevelComplete(currentLevel)) {
+        setCompletedLevel(currentLevelIndex + 1);
+        setShowLevelComplete(true);
+      } else {
+        // Go to first incomplete word
+        const firstIncomplete = words.findIndex((_, idx) => !isWordCompleted(currentLevel, idx));
+        if (firstIncomplete !== -1) {
+          setCurrentWordIndex(firstIncomplete);
           setUserInput('');
         }
-      } else {
-        // All levels complete - go back to start
-        setCurrentLevel('nivel1');
-        setCurrentWordIndex(0);
-        setUserInput('');
       }
     }
   };
@@ -150,7 +194,9 @@ export default function Game() {
           onChange={setUserInput}
           targetWord={currentWord.word}
           onComplete={handleWordComplete}
-          disabled={showSuccess}
+          disabled={showSuccess || showLevelComplete}
+          onKeyCorrect={playKeyCorrect}
+          onKeyWrong={playKeyWrong}
         />
 
         {/* Navigation buttons */}
@@ -191,6 +237,18 @@ export default function Game() {
         show={showSuccess}
         onComplete={handleSuccessComplete}
       />
+
+      {/* Level complete modal */}
+      <LevelCompleteModal
+        show={showLevelComplete}
+        level={completedLevel}
+        onContinue={handleLevelModalContinue}
+        isLastLevel={isLastLevel && isLevelComplete('nivel3')}
+        playSound={playLevelComplete}
+      />
+
+      {/* Sound toggle */}
+      <SoundToggle enabled={soundEnabled} onToggle={toggleSound} />
 
       {/* Reset progress button */}
       <ResetButton onReset={handleReset} />

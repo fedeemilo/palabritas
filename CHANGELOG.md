@@ -2,7 +2,50 @@
 
 Todos los cambios notables de este proyecto serán documentados en este archivo.
 
-## [1.0.0] - 2024-02-18
+## [1.1.0] - 2025-02-18
+
+### Agregado
+
+- **Sistema de sonidos**
+  - Sonidos generados con Web Audio API (sin dependencias externas)
+  - Tono al escribir letra correcta
+  - Tono de error al equivocarse
+  - Melodía de celebración al completar palabra
+  - Fanfarria al completar nivel
+  - Botón toggle para activar/desactivar sonidos
+  - Preferencia guardada en localStorage
+
+- **Modal de nivel completado**
+  - Pantalla de celebración al terminar un nivel
+  - Trofeo animado (corona en último nivel)
+  - Estrellas con animación
+  - Botón para continuar al siguiente nivel
+
+- **Auto-avance**
+  - Avanza automáticamente a la siguiente palabra tras completar una
+
+### Cambiado
+
+- **Emojis en lugar de imágenes externas**
+  - Reemplazadas URLs de Flaticon por emojis nativos
+  - Más confiable, sin dependencias externas
+  - Carga instantánea
+
+- **Palabra "mesa" reemplazada por "pato"**
+  - No existe emoji claro de mesa
+  - "pato" tiene emoji representativo (🦆)
+
+### Técnico
+
+- Nuevo hook `useSound` para manejo de audio
+- Componente `SoundToggle` para control de sonido
+- Componente `LevelCompleteModal` para celebración de nivel
+- Componente `EmojiDisplay` reemplaza a `ImageDisplay`
+- Animación `float` para elementos flotantes
+
+---
+
+## [1.0.0] - 2025-02-18
 
 ### Agregado
 
@@ -13,7 +56,6 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 
 - **Interfaz educativa minimalista**
   - Fondo blanco puro sin distracciones
-  - Ilustraciones claras y coloridas (iconos Flaticon)
   - Tipografía Inter ultra legible
   - Palabras en MAYÚSCULAS (como aparecen en el teclado)
 
@@ -35,15 +77,10 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
   - Selector de nivel con indicador de progreso
   - Botón de reinicio con confirmación
 
-- **Optimizaciones**
-  - Loader durante carga de imágenes
-  - Precarga de imagen siguiente
-  - Transiciones suaves entre palabras
-
 ### Técnico
 
 - Next.js 14+ con App Router
 - TypeScript
 - Tailwind CSS
-- 50 palabras con ilustraciones
+- 50 palabras con emojis
 - Sin backend, 100% frontend

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import { isValidPartialInput, compareWords, normalizeText } from '@/utils/normalize';
+import { isValidPartialInput, compareWords } from '@/utils/normalize';
 
 interface UserInputProps {
   value: string;
@@ -9,6 +9,8 @@ interface UserInputProps {
   targetWord: string;
   onComplete: () => void;
   disabled?: boolean;
+  onKeyCorrect?: () => void;
+  onKeyWrong?: () => void;
 }
 
 export default function UserInput({
@@ -16,7 +18,9 @@ export default function UserInput({
   onChange,
   targetWord,
   onComplete,
-  disabled = false
+  disabled = false,
+  onKeyCorrect,
+  onKeyWrong
 }: UserInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [showError, setShowError] = useState(false);
@@ -29,7 +33,7 @@ export default function UserInput({
     }
   }, [disabled, targetWord]);
 
-  // Clear error state when value changes or word changes
+  // Clear error state when word changes
   useEffect(() => {
     setShowError(false);
     setErrorChar('');
@@ -38,11 +42,22 @@ export default function UserInput({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value.toUpperCase();
 
+    // Handle backspace (shorter input)
+    if (newValue.length < value.length) {
+      onChange(newValue);
+      return;
+    }
+
     // Check if new character is valid
     if (newValue === '' || isValidPartialInput(newValue, targetWord)) {
       setShowError(false);
       setErrorChar('');
       onChange(newValue);
+
+      // Play correct key sound
+      if (newValue.length > value.length) {
+        onKeyCorrect?.();
+      }
 
       // Check if word is complete
       if (compareWords(newValue, targetWord)) {
@@ -54,24 +69,14 @@ export default function UserInput({
       setErrorChar(wrongChar);
       setShowError(true);
 
+      // Play wrong key sound
+      onKeyWrong?.();
+
       // Clear error after animation
       setTimeout(() => {
         setShowError(false);
         setErrorChar('');
       }, 600);
-    }
-  };
-
-  // Handle key press for immediate feedback
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    // Allow backspace, delete, arrows, etc.
-    if (e.key.length > 1) return;
-
-    const nextChar = e.key.toUpperCase();
-    const expectedChar = normalizeText(targetWord[value.length] || '').toUpperCase();
-
-    if (normalizeText(nextChar) !== expectedChar) {
-      // Wrong key - will show error in onChange
     }
   };
 
@@ -84,7 +89,6 @@ export default function UserInput({
           type="text"
           value={value}
           onChange={handleChange}
-          onKeyDown={handleKeyDown}
           disabled={disabled}
           autoComplete="off"
           autoCorrect="off"

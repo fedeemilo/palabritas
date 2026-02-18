@@ -108,6 +108,20 @@ body {
   animation: error-pop 0.6s ease-out forwards;
 }
 
+/* Float animation for level complete */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 2s ease-in-out infinite;
+}
+
 /* Remove default input styling for better accessibility */
 input:focus {
   outline: none;
