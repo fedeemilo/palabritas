@@ -1,18 +1,19 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { WordsData, Level } from '@/types';
 import { useGameProgress } from '@/hooks/useGameProgress';
 import { useSound } from '@/hooks/useSound';
+import { useZenMode } from '@/hooks/useZenMode';
 import EmojiDisplay from './EmojiDisplay';
 import WordDisplay from './WordDisplay';
 import UserInput from './UserInput';
 import SuccessAnimation from './SuccessAnimation';
 import LevelCompleteModal from './LevelCompleteModal';
-import ProgressIndicator from './ProgressIndicator';
 import LevelSelector from './LevelSelector';
 import ResetButton from './ResetButton';
 import SoundToggle from './SoundToggle';
+import ZenToggle from './ZenToggle';
 import wordsData from '@/data/words.json';
 
 const LEVELS: Level[] = ['nivel1', 'nivel2', 'nivel3'];
@@ -43,6 +44,8 @@ export default function Game() {
     playLevelComplete
   } = useSound();
 
+  const { enabled: zenMode, toggle: toggleZen } = useZenMode();
+
   const [userInput, setUserInput] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
   const [showLevelComplete, setShowLevelComplete] = useState(false);
@@ -51,7 +54,6 @@ export default function Game() {
   const words = data[currentLevel];
   const currentWord = words[currentWordIndex];
   const isCurrentCompleted = isWordCompleted(currentLevel, currentWordIndex);
-  const levelStats = getLevelStats(currentLevel);
 
   const currentLevelIndex = LEVELS.indexOf(currentLevel);
   const isLastLevel = currentLevelIndex === LEVELS.length - 1;
@@ -140,21 +142,22 @@ export default function Game() {
   }
 
   return (
-    <main className="min-h-screen bg-white flex flex-col items-center justify-center px-4 pt-20 pb-16 md:p-8">
-      <ProgressIndicator
-        currentIndex={currentWordIndex}
-        totalWords={words.length}
-        level={currentLevel}
-        isCurrentWordCompleted={isCurrentCompleted}
-        completedInLevel={levelStats.completed}
-      />
+    <main className={`
+      min-h-screen bg-white flex flex-col items-center justify-center
+      ${zenMode ? 'p-4' : 'px-4 pt-20 pb-16 md:p-8'}
+    `}>
+      {/* Zen mode toggle - always visible */}
+      <ZenToggle enabled={zenMode} onToggle={toggleZen} />
 
-      <LevelSelector
-        currentLevel={currentLevel}
-        onLevelChange={handleLevelChange}
-        isLevelUnlocked={isLevelUnlocked}
-        getLevelStats={getLevelStats}
-      />
+      {/* UI elements hidden in Zen mode */}
+      {!zenMode && (
+        <LevelSelector
+          currentLevel={currentLevel}
+          onLevelChange={handleLevelChange}
+          isLevelUnlocked={isLevelUnlocked}
+          getLevelStats={getLevelStats}
+        />
+      )}
 
       {/* Main content - centered vertically */}
       <div className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8 w-full max-w-xl">
@@ -165,8 +168,8 @@ export default function Game() {
             word={currentWord.word}
           />
 
-          {/* Completed badge */}
-          {isCurrentCompleted && (
+          {/* Completed badge - hidden in Zen mode */}
+          {!zenMode && isCurrentCompleted && (
             <div className="absolute -top-2 -right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
               <svg
                 className="w-7 h-7 text-white"
@@ -247,11 +250,16 @@ export default function Game() {
         playSound={playLevelComplete}
       />
 
-      {/* Sound toggle */}
-      <SoundToggle enabled={soundEnabled} onToggle={toggleSound} />
+      {/* UI elements hidden in Zen mode */}
+      {!zenMode && (
+        <>
+          {/* Sound toggle */}
+          <SoundToggle enabled={soundEnabled} onToggle={toggleSound} />
 
-      {/* Reset progress button */}
-      <ResetButton onReset={handleReset} />
+          {/* Reset progress button */}
+          <ResetButton onReset={handleReset} />
+        </>
+      )}
     </main>
   );
 }
