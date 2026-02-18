@@ -140,7 +140,7 @@ export default function Game() {
   }
 
   return (
-    <main className="min-h-screen bg-white flex flex-col items-center justify-center p-4 md:p-8">
+    <main className="min-h-screen bg-white flex flex-col items-center justify-center px-4 pt-20 pb-16 md:p-8">
       <ProgressIndicator
         currentIndex={currentWordIndex}
         totalWords={words.length}
@@ -157,7 +157,7 @@ export default function Game() {
       />
 
       {/* Main content - centered vertically */}
-      <div className="flex flex-col items-center gap-6 md:gap-8 w-full max-w-xl">
+      <div className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8 w-full max-w-xl">
         {/* Emoji with completed badge */}
         <div className="relative">
           <EmojiDisplay
@@ -200,12 +200,12 @@ export default function Game() {
         />
 
         {/* Navigation buttons */}
-        <div className="flex gap-4 mt-4">
+        <div className="flex gap-3 sm:gap-4 mt-2 sm:mt-4">
           <button
             onClick={handlePreviousWord}
             disabled={currentWordIndex === 0}
             className={`
-              px-6 py-3 text-lg font-medium rounded-xl
+              px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-lg font-medium rounded-xl
               transition-all duration-200
               ${currentWordIndex === 0
                 ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
@@ -220,7 +220,7 @@ export default function Game() {
           <button
             onClick={handleNextWord}
             className="
-              px-6 py-3 text-lg font-medium rounded-xl
+              px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-lg font-medium rounded-xl
               bg-blue-500 text-white
               hover:bg-blue-600 transition-all duration-200
               cursor-pointer active:scale-95

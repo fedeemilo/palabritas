@@ -81,7 +81,7 @@ export default function UserInput({
   };
 
   return (
-    <div className="w-full max-w-md relative">
+    <div className="w-full max-w-sm sm:max-w-md relative px-2 sm:px-0">
       {/* Main input showing correct letters */}
       <div className="relative">
         <input
@@ -95,8 +95,8 @@ export default function UserInput({
           autoCapitalize="characters"
           spellCheck={false}
           className={`
-            w-full text-center text-4xl md:text-5xl font-semibold tracking-widest
-            py-4 px-6 rounded-2xl
+            w-full text-center text-3xl sm:text-4xl md:text-5xl font-semibold tracking-widest
+            py-3 px-4 sm:py-4 sm:px-6 rounded-2xl
             border-4 outline-none transition-all duration-200
             ${showError
               ? 'border-red-400 bg-red-50 animate-shake'
@@ -112,7 +112,7 @@ export default function UserInput({
         {/* Error character overlay */}
         {showError && errorChar && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <span className="text-5xl md:text-6xl font-bold text-red-500 animate-error-pop">
+            <span className="text-4xl sm:text-5xl md:text-6xl font-bold text-red-500 animate-error-pop">
               {errorChar}
             </span>
           </div>
@@ -120,8 +120,8 @@ export default function UserInput({
       </div>
 
       {/* Helper text */}
-      <div className="mt-3 text-center">
-        <span className="text-sm text-gray-400">
+      <div className="mt-2 sm:mt-3 text-center">
+        <span className="text-xs sm:text-sm text-gray-400">
           {value.length} / {targetWord.length} letras
         </span>
       </div>
