@@ -45,7 +45,7 @@ function playTone(frequency: number, duration: number, type: OscillatorType = 's
 }
 
 export function useSound() {
-  const [enabled, setEnabled] = useState(true);
+  const [enabled, setEnabled] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
   // Load preference from localStorage
