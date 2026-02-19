@@ -175,7 +175,7 @@ export default function Game() {
             {/* Main content - centered vertically */}
             <div className="flex flex-col items-center w-full max-w-xl gap-4 sm:gap-6 md:gap-8">
                 {/* Emoji with completed badge */}
-                <div ref={imageRef} className="relative">
+                <div ref={imageRef} className={`relative transition-transform duration-300 ${isKeyboardVisible ? 'scale-75' : ''}`}>
                     <EmojiDisplay emoji={currentWord.emoji} word={currentWord.word} level={currentLevel} />
 
                     {/* Completed badge - hidden in Zen mode */}
