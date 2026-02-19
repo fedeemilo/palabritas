@@ -2,6 +2,17 @@
 
 Todos los cambios notables de este proyecto serán documentados en este archivo.
 
+## [1.4.2] - 2026-02-19
+
+### Mejorado
+
+- **Layout adaptativo para teclado móvil**
+  - Detecta cuando el teclado virtual está abierto
+  - Reduce la imagen y ajusta espacios para que el contenido sea visible
+  - Nuevo hook `useKeyboardVisible` usando Visual Viewport API
+
+---
+
 ## [1.4.1] - 2026-02-19
 
 ### Mejorado
