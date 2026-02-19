@@ -16,7 +16,7 @@ import SoundToggle from './SoundToggle';
 import ZenToggle from './ZenToggle';
 import wordsData from '@/data/words.json';
 
-const LEVELS: Level[] = ['nivel1', 'nivel2', 'nivel3'];
+const LEVELS: Level[] = ['nivel1', 'nivel2', 'nivel3', 'nivel4', 'nivel5', 'nivel6'];
 
 export default function Game() {
   const data = wordsData as WordsData;
@@ -246,7 +246,7 @@ export default function Game() {
         show={showLevelComplete}
         level={completedLevel}
         onContinue={handleLevelModalContinue}
-        isLastLevel={isLastLevel && isLevelComplete('nivel3')}
+        isLastLevel={isLastLevel && isLevelComplete('nivel6')}
         playSound={playLevelComplete}
       />
 

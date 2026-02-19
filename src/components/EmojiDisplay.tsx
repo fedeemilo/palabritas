@@ -6,6 +6,10 @@ interface EmojiDisplayProps {
 }
 
 export default function EmojiDisplay({ emoji, word }: EmojiDisplayProps) {
+  // Count emojis (rough estimate - emojis can be multi-codepoint)
+  const emojiCount = [...emoji].filter(char => char.match(/[\p{Emoji}]/u)).length;
+  const hasMultipleEmojis = emojiCount > 1 || emoji.length > 2;
+
   return (
     <div
       className="
@@ -17,7 +21,15 @@ export default function EmojiDisplay({ emoji, word }: EmojiDisplayProps) {
       role="img"
       aria-label={`Imagen de ${word}`}
     >
-      <span className="text-[120px] sm:text-[150px] md:text-[180px] leading-none select-none">
+      <span
+        className={`
+          leading-none select-none
+          ${hasMultipleEmojis
+            ? 'text-[60px] sm:text-[80px] md:text-[100px]'
+            : 'text-[120px] sm:text-[150px] md:text-[180px]'
+          }
+        `}
+      >
         {emoji}
       </span>
     </div>

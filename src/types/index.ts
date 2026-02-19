@@ -8,9 +8,12 @@ export interface WordsData {
   nivel1: Word[];
   nivel2: Word[];
   nivel3: Word[];
+  nivel4: Word[];
+  nivel5: Word[];
+  nivel6: Word[];
 }
 
-export type Level = 'nivel1' | 'nivel2' | 'nivel3';
+export type Level = 'nivel1' | 'nivel2' | 'nivel3' | 'nivel4' | 'nivel5' | 'nivel6';
 
 export interface GameState {
   currentLevel: Level;

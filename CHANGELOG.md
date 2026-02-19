@@ -2,6 +2,29 @@
 
 Todos los cambios notables de este proyecto serán documentados en este archivo.
 
+## [1.2.0] - 2025-02-18
+
+### Agregado
+
+- **3 nuevos niveles de oraciones**
+  - Nivel 4: Oraciones muy cortas (10 oraciones) - "el sol brilla", "yo como pan", etc.
+  - Nivel 5: Oraciones cortas (10 oraciones) - "el pajaro vuela alto", "yo como una manzana", etc.
+  - Nivel 6: Oraciones más largas (10 oraciones) - "el elefante tiene trompa larga", etc.
+  - Total: 30 oraciones nuevas con emojis representativos
+
+### Cambiado
+
+- **UI adaptativa para oraciones**
+  - Tamaño de fuente dinámico según longitud del texto
+  - Input más ancho para oraciones
+  - Emojis más pequeños cuando hay múltiples
+  - Contador muestra "caracteres" en oraciones, "letras" en palabras
+
+- **Selector de nivel mejorado**
+  - Etiquetas "Palabras" vs "Oraciones" para diferenciar tipos de nivel
+
+---
+
 ## [1.1.0] - 2025-02-18
 
 ### Agregado

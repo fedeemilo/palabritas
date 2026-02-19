@@ -10,9 +10,12 @@ interface LevelSelectorProps {
 }
 
 const levels: { key: Level; label: string }[] = [
-  { key: 'nivel1', label: 'Nivel 1' },
-  { key: 'nivel2', label: 'Nivel 2' },
-  { key: 'nivel3', label: 'Nivel 3' }
+  { key: 'nivel1', label: 'Nivel 1 - Palabras' },
+  { key: 'nivel2', label: 'Nivel 2 - Palabras' },
+  { key: 'nivel3', label: 'Nivel 3 - Palabras' },
+  { key: 'nivel4', label: 'Nivel 4 - Oraciones' },
+  { key: 'nivel5', label: 'Nivel 5 - Oraciones' },
+  { key: 'nivel6', label: 'Nivel 6 - Oraciones' }
 ];
 
 export default function LevelSelector({

@@ -54,5 +54,41 @@
     { "word": "guitarra", "emoji": "🎸", "difficulty": 3 },
     { "word": "canguro", "emoji": "🦘", "difficulty": 3 },
     { "word": "hamburguesa", "emoji": "🍔", "difficulty": 3 }
+  ],
+  "nivel4": [
+    { "word": "el sol brilla", "emoji": "☀️✨", "difficulty": 4 },
+    { "word": "yo como pan", "emoji": "🧑‍🍞", "difficulty": 4 },
+    { "word": "el gato duerme", "emoji": "🐱💤", "difficulty": 4 },
+    { "word": "el perro corre", "emoji": "🐶💨", "difficulty": 4 },
+    { "word": "yo bebo agua", "emoji": "🧑💧", "difficulty": 4 },
+    { "word": "el pez nada", "emoji": "🐟🌊", "difficulty": 4 },
+    { "word": "la luna sale", "emoji": "🌙🌃", "difficulty": 4 },
+    { "word": "yo veo un oso", "emoji": "👀🐻", "difficulty": 4 },
+    { "word": "el pajaro canta", "emoji": "🐦🎵", "difficulty": 4 },
+    { "word": "yo tengo un globo", "emoji": "🧑🎈", "difficulty": 4 }
+  ],
+  "nivel5": [
+    { "word": "el pajaro vuela alto", "emoji": "🐦☁️⬆️", "difficulty": 5 },
+    { "word": "yo como una manzana", "emoji": "🧑🍎", "difficulty": 5 },
+    { "word": "el gato toma leche", "emoji": "🐱🥛", "difficulty": 5 },
+    { "word": "el perro mueve la cola", "emoji": "🐶🦴", "difficulty": 5 },
+    { "word": "yo juego con la pelota", "emoji": "🧑⚽", "difficulty": 5 },
+    { "word": "la tortuga camina lento", "emoji": "🐢🐌", "difficulty": 5 },
+    { "word": "el conejo salta mucho", "emoji": "🐰⬆️", "difficulty": 5 },
+    { "word": "yo veo una estrella", "emoji": "👀⭐", "difficulty": 5 },
+    { "word": "el caballo corre rapido", "emoji": "🐴💨", "difficulty": 5 },
+    { "word": "yo como un helado", "emoji": "🧑🍦", "difficulty": 5 }
+  ],
+  "nivel6": [
+    { "word": "el elefante tiene trompa larga", "emoji": "🐘👃", "difficulty": 6 },
+    { "word": "la mariposa vuela por el jardin", "emoji": "🦋🌸🌳", "difficulty": 6 },
+    { "word": "yo veo un arcoiris muy lindo", "emoji": "👀🌈😍", "difficulty": 6 },
+    { "word": "el dinosaurio era muy grande", "emoji": "🦕📏", "difficulty": 6 },
+    { "word": "yo como pizza con mi familia", "emoji": "🧑🍕👨‍👩‍👧", "difficulty": 6 },
+    { "word": "el cocodrilo nada en el rio", "emoji": "🐊🌊", "difficulty": 6 },
+    { "word": "yo toco la guitarra muy bien", "emoji": "🧑🎸🎵", "difficulty": 6 },
+    { "word": "el canguro salta con su bebe", "emoji": "🦘👶", "difficulty": 6 },
+    { "word": "yo ando en bicicleta al parque", "emoji": "🧑🚲🌳", "difficulty": 6 },
+    { "word": "el girasol mira hacia el sol", "emoji": "🌻☀️", "difficulty": 6 }
   ]
 }

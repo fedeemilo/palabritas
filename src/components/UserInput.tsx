@@ -80,8 +80,11 @@ export default function UserInput({
     }
   };
 
+  // Determine if it's a sentence (has spaces)
+  const isSentence = targetWord.includes(' ');
+
   return (
-    <div className="w-full max-w-sm sm:max-w-md relative px-2 sm:px-0">
+    <div className={`w-full relative px-2 sm:px-0 ${isSentence ? 'max-w-lg sm:max-w-xl' : 'max-w-sm sm:max-w-md'}`}>
       {/* Main input showing correct letters */}
       <div className="relative">
         <input
@@ -95,9 +98,13 @@ export default function UserInput({
           autoCapitalize="characters"
           spellCheck={false}
           className={`
-            w-full text-center text-3xl sm:text-4xl md:text-5xl font-semibold tracking-widest
+            w-full text-center font-semibold
             py-3 px-4 sm:py-4 sm:px-6 rounded-2xl
             border-4 outline-none transition-all duration-200
+            ${isSentence
+              ? 'text-xl sm:text-2xl md:text-3xl tracking-wide'
+              : 'text-3xl sm:text-4xl md:text-5xl tracking-widest'
+            }
             ${showError
               ? 'border-red-400 bg-red-50 animate-shake'
               : 'border-gray-200 focus:border-blue-400 bg-white'
@@ -106,13 +113,13 @@ export default function UserInput({
           `}
           style={{ fontFamily: 'Inter, Poppins, system-ui, sans-serif' }}
           placeholder="..."
-          aria-label={`Escribe la palabra: ${targetWord.toUpperCase()}`}
+          aria-label={`Escribe: ${targetWord.toUpperCase()}`}
         />
 
         {/* Error character overlay */}
         {showError && errorChar && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <span className="text-4xl sm:text-5xl md:text-6xl font-bold text-red-500 animate-error-pop">
+            <span className={`font-bold text-red-500 animate-error-pop ${isSentence ? 'text-3xl sm:text-4xl md:text-5xl' : 'text-4xl sm:text-5xl md:text-6xl'}`}>
               {errorChar}
             </span>
           </div>
@@ -122,7 +129,7 @@ export default function UserInput({
       {/* Helper text */}
       <div className="mt-2 sm:mt-3 text-center">
         <span className="text-xs sm:text-sm text-gray-400">
-          {value.length} / {targetWord.length} letras
+          {value.length} / {targetWord.length} {isSentence ? 'caracteres' : 'letras'}
         </span>
       </div>
     </div>
