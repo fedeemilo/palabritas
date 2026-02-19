@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import { isValidPartialInput, compareWords } from '@/utils/normalize';
+import { isValidPartialInput, compareWords, isNextCharSpace } from '@/utils/normalize';
 
 interface UserInputProps {
   value: string;
@@ -25,6 +25,8 @@ export default function UserInput({
   const inputRef = useRef<HTMLInputElement>(null);
   const [showError, setShowError] = useState(false);
   const [errorChar, setErrorChar] = useState('');
+  const [spaceErrorCount, setSpaceErrorCount] = useState(0);
+  const [showSpaceHint, setShowSpaceHint] = useState(false);
 
   // Focus input on mount and when re-enabled
   useEffect(() => {
@@ -33,10 +35,12 @@ export default function UserInput({
     }
   }, [disabled, targetWord]);
 
-  // Clear error state when word changes
+  // Clear error state and space hint when word changes
   useEffect(() => {
     setShowError(false);
     setErrorChar('');
+    setSpaceErrorCount(0);
+    setShowSpaceHint(false);
   }, [targetWord]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,6 +56,8 @@ export default function UserInput({
     if (newValue === '' || isValidPartialInput(newValue, targetWord)) {
       setShowError(false);
       setErrorChar('');
+      setSpaceErrorCount(0);
+      setShowSpaceHint(false);
       onChange(newValue);
 
       // Play correct key sound
@@ -68,6 +74,15 @@ export default function UserInput({
       const wrongChar = newValue.slice(-1);
       setErrorChar(wrongChar);
       setShowError(true);
+
+      // Check if error is because next char should be a space
+      if (isNextCharSpace(value, targetWord)) {
+        const newCount = spaceErrorCount + 1;
+        setSpaceErrorCount(newCount);
+        if (newCount >= 3) {
+          setShowSpaceHint(true);
+        }
+      }
 
       // Play wrong key sound
       onKeyWrong?.();
@@ -125,6 +140,18 @@ export default function UserInput({
           </div>
         )}
       </div>
+
+      {/* Spacebar hint */}
+      {showSpaceHint && (
+        <div className="mt-3 flex justify-center animate-fade-in">
+          <div className="flex items-center gap-2 px-4 py-2 bg-blue-50 border-2 border-blue-200 rounded-xl">
+            <span className="text-blue-600 text-sm font-medium">Presioná</span>
+            <div className="px-4 py-1 bg-gray-200 rounded-lg border-b-4 border-gray-400 shadow-sm">
+              <span className="text-xs text-gray-600 font-medium tracking-widest">ESPACIO</span>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Helper text */}
       <div className="mt-2 sm:mt-3 text-center">

@@ -24,3 +24,13 @@ export function isValidPartialInput(input: string, target: string): boolean {
   const normalizedTarget = normalizeText(target);
   return normalizedTarget.startsWith(normalizedInput);
 }
+
+/**
+ * Verifica si el próximo carácter esperado es un espacio
+ */
+export function isNextCharSpace(input: string, target: string): boolean {
+  const normalizedInput = normalizeText(input);
+  const normalizedTarget = normalizeText(target);
+  const nextChar = normalizedTarget[normalizedInput.length];
+  return nextChar === ' ';
+}

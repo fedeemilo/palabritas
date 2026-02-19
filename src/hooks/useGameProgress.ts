@@ -94,6 +94,9 @@ export function useGameProgress(wordsData: WordsData) {
 
   // Check if level is unlocked
   const isLevelUnlocked = useCallback((level: Level): boolean => {
+    // Dev mode: unlock all levels
+    if (process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true') return true;
+
     if (level === 'nivel1') return true;
     if (level === 'nivel2') return isLevelComplete('nivel1');
     if (level === 'nivel3') return isLevelComplete('nivel2');

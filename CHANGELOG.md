@@ -2,6 +2,45 @@
 
 Todos los cambios notables de este proyecto serán documentados en este archivo.
 
+## [1.3.0] - 2025-02-19
+
+### Agregado
+
+- **Imágenes generadas con IA**
+  - 80 imágenes estilo Ghibli generadas con GPT-Image
+  - Imágenes para todas las palabras (niveles 1-3)
+  - Imágenes para todas las oraciones (niveles 4-6)
+  - Transición suave con fade-in al cargar imágenes
+  - Scripts de generación: `generate-images.ts` y `generate-words-images.ts`
+
+- **Hint de barra espaciadora**
+  - Aparece después de 3 errores cuando el próximo carácter es un espacio
+  - Ayuda visual para niños que no saben usar la barra espaciadora
+
+- **Iconos Lucide React**
+  - Reemplazados emojis de UI por iconos vectoriales
+  - Check, Star, Trophy, Crown, Volume, etc.
+  - Aspecto más limpio y profesional
+
+### Cambiado
+
+- **Oraciones mejoradas (niveles 4-6)**
+  - Frases más naturales y útiles para el día a día
+  - "tengo hambre", "vamos al parque", "es hora de dormir", etc.
+  - Mejor representación visual con imágenes generadas
+
+- **Fondo de la app**
+  - Variable CSS `--background` para cambiar color en un solo lugar
+  - Tono más suave, menos cansador para la vista
+
+### Técnico
+
+- Nueva dependencia: `lucide-react`
+- Nueva dependencia: `openai` (dev)
+- Scripts npm: `generate-images`, `generate-words-images`
+
+---
+
 ## [1.2.0] - 2025-02-18
 
 ### Agregado

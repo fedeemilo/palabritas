@@ -1,5 +1,7 @@
 'use client';
 
+import { X, Minimize2 } from 'lucide-react';
+
 interface ZenToggleProps {
   enabled: boolean;
   onToggle: () => void;
@@ -22,7 +24,7 @@ export default function ZenToggle({ enabled, onToggle }: ZenToggleProps) {
       aria-label={enabled ? 'Desactivar modo Zen' : 'Activar modo Zen'}
       title={enabled ? 'Salir de modo Zen' : 'Modo Zen'}
     >
-      {enabled ? '✕' : '☯'}
+      {enabled ? <X className="w-5 h-5" /> : <Minimize2 className="w-5 h-5" />}
     </button>
   );
 }
