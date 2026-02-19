@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { WordsData, Level } from '@/types'
 import { useGameProgress } from '@/hooks/useGameProgress'
@@ -48,6 +48,14 @@ export default function Game() {
 
     const { enabled: zenMode, toggle: toggleZen } = useZenMode()
     const isKeyboardVisible = useKeyboardVisible()
+    const imageRef = useRef<HTMLDivElement>(null)
+
+    // Scroll to image when keyboard opens
+    useEffect(() => {
+        if (isKeyboardVisible && imageRef.current) {
+            imageRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+    }, [isKeyboardVisible])
 
     const [userInput, setUserInput] = useState('')
     const [showSuccess, setShowSuccess] = useState(false)
@@ -147,8 +155,7 @@ export default function Game() {
     return (
         <main
             className={`
-      min-h-screen bg-[var(--background)] flex flex-col items-center
-      ${isKeyboardVisible ? 'justify-start pt-4' : 'justify-center'}
+      min-h-screen bg-[var(--background)] flex flex-col items-center justify-center
       ${zenMode ? 'p-4' : 'px-4 pt-20 pb-16 md:p-8'}
     `}
         >
@@ -166,12 +173,9 @@ export default function Game() {
             )}
 
             {/* Main content - centered vertically */}
-            <div className={`
-                flex flex-col items-center w-full max-w-xl
-                ${isKeyboardVisible ? 'gap-2' : 'gap-4 sm:gap-6 md:gap-8'}
-            `}>
+            <div className="flex flex-col items-center w-full max-w-xl gap-4 sm:gap-6 md:gap-8">
                 {/* Emoji with completed badge */}
-                <div className={`relative ${isKeyboardVisible ? 'scale-[0.65] -mb-8 mt-4' : ''}`}>
+                <div ref={imageRef} className="relative">
                     <EmojiDisplay emoji={currentWord.emoji} word={currentWord.word} level={currentLevel} />
 
                     {/* Completed badge - hidden in Zen mode */}
