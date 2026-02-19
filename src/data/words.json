@@ -90,5 +90,12 @@
     { "word": "mi perro corre muy rapido", "emoji": "🐕💨", "difficulty": 6 },
     { "word": "quiero tomar leche con galletitas", "emoji": "🥛🍪", "difficulty": 6 },
     { "word": "hoy hace un dia muy lindo", "emoji": "☀️😊🌈", "difficulty": 6 }
+  ],
+  "nivel7": [
+    { "word": "hakuna matata", "emoji": "🦁", "difficulty": 7 },
+    { "word": "yo soy el rey leon", "emoji": "🦁👑", "difficulty": 7 },
+    { "word": "soy un panda rojo", "emoji": "🐼", "difficulty": 7 },
+    { "word": "somos una manada", "emoji": "🦣", "difficulty": 7 },
+    { "word": "quiero mi bellota", "emoji": "🐿️🌰", "difficulty": 7 }
   ]
 }

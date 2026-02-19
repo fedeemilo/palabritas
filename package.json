@@ -1,6 +1,6 @@
 {
   "name": "palabritas",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,7 +9,8 @@
     "lint": "eslint",
     "prepare": "husky",
     "generate-images": "npx tsx --env-file=.env.local scripts/generate-images.ts",
-    "generate-words-images": "npx tsx --env-file=.env.local scripts/generate-words-images.ts"
+    "generate-words-images": "npx tsx --env-file=.env.local scripts/generate-words-images.ts",
+    "generate-personajes-images": "npx tsx --env-file=.env.local scripts/generate-personajes-images.ts"
   },
   "dependencies": {
     "lucide-react": "^0.575.0",

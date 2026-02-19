@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 interface EmojiDisplayProps {
   emoji: string;
   word: string;
+  level?: string;
 }
 
 // Helper to convert word/sentence to filename
@@ -17,13 +18,18 @@ function toFilename(text: string): string {
     .replace(/^-|-$/g, '');
 }
 
-export default function EmojiDisplay({ emoji, word }: EmojiDisplayProps) {
+// Determine image folder based on level
+function getImageFolder(word: string, level?: string): string {
+  if (level === 'nivel7') return 'personajes';
+  // Fallback: detect if it's a sentence (has spaces = levels 4-6) or word (levels 1-3)
+  return word.includes(' ') ? 'oraciones' : 'palabras';
+}
+
+export default function EmojiDisplay({ emoji, word, level }: EmojiDisplayProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [currentWord, setCurrentWord] = useState(word);
 
-  // Detect if it's a sentence (has spaces = levels 4-6) or word (levels 1-3)
-  const isSentence = word.includes(' ');
-  const imageFolder = isSentence ? 'oraciones' : 'palabras';
+  const imageFolder = getImageFolder(word, level);
   const imagePath = `/images/${imageFolder}/${toFilename(word)}.png`;
 
   // Reset loaded state when word changes

@@ -16,7 +16,7 @@ import SoundToggle from './SoundToggle'
 import ZenToggle from './ZenToggle'
 import wordsData from '@/data/words.json'
 
-const LEVELS: Level[] = ['nivel1', 'nivel2', 'nivel3', 'nivel4', 'nivel5', 'nivel6']
+const LEVELS: Level[] = ['nivel1', 'nivel2', 'nivel3', 'nivel4', 'nivel5', 'nivel6', 'nivel7']
 
 export default function Game() {
     const data = wordsData as WordsData
@@ -165,7 +165,7 @@ export default function Game() {
             <div className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8 w-full max-w-xl">
                 {/* Emoji with completed badge */}
                 <div className="relative">
-                    <EmojiDisplay emoji={currentWord.emoji} word={currentWord.word} />
+                    <EmojiDisplay emoji={currentWord.emoji} word={currentWord.word} level={currentLevel} />
 
                     {/* Completed badge - hidden in Zen mode */}
                     {!zenMode && isCurrentCompleted && (

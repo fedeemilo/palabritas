@@ -2,6 +2,24 @@
 
 Todos los cambios notables de este proyecto serán documentados en este archivo.
 
+## [1.4.0] - 2026-02-19
+
+### Agregado
+
+- **Nivel Bonus - Personajes**
+  - Nuevo nivel especial con personajes de películas animadas
+  - 5 frases representativas: "hakuna matata", "yo soy el rey leon", etc.
+  - Imágenes estilo Ghibli generadas con IA para cada personaje
+  - Se desbloquea al completar el Nivel 6
+
+### Técnico
+
+- Nuevo script: `generate-personajes-images` para generar imágenes de personajes
+- Soporte para argumento individual: `npm run generate-personajes-images -- simba`
+- Carpeta de imágenes: `/public/images/personajes/`
+
+---
+
 ## [1.3.0] - 2025-02-19
 
 ### Agregado

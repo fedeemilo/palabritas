@@ -15,7 +15,8 @@ const levels: { key: Level; label: string }[] = [
   { key: 'nivel3', label: 'Nivel 3 - Palabras' },
   { key: 'nivel4', label: 'Nivel 4 - Oraciones' },
   { key: 'nivel5', label: 'Nivel 5 - Oraciones' },
-  { key: 'nivel6', label: 'Nivel 6 - Oraciones' }
+  { key: 'nivel6', label: 'Nivel 6 - Oraciones' },
+  { key: 'nivel7', label: 'Bonus - Personajes' }
 ];
 
 export default function LevelSelector({
