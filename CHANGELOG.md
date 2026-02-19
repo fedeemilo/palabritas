@@ -2,6 +2,20 @@
 
 Todos los cambios notables de este proyecto serán documentados en este archivo.
 
+## [1.4.1] - 2026-02-19
+
+### Mejorado
+
+- **Botones de navegación rediseñados**
+  - Botones circulares con iconos Lucide (ChevronLeft/ChevronRight)
+  - Colores suaves que combinan con el fondo
+  - Sin texto, más minimalistas
+
+- **Modo Zen mejorado**
+  - Oculta el contador de caracteres/letras debajo del input
+
+---
+
 ## [1.4.0] - 2026-02-19
 
 ### Agregado

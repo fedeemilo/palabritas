@@ -11,6 +11,7 @@ interface UserInputProps {
   disabled?: boolean;
   onKeyCorrect?: () => void;
   onKeyWrong?: () => void;
+  zenMode?: boolean;
 }
 
 export default function UserInput({
@@ -20,7 +21,8 @@ export default function UserInput({
   onComplete,
   disabled = false,
   onKeyCorrect,
-  onKeyWrong
+  onKeyWrong,
+  zenMode = false
 }: UserInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [showError, setShowError] = useState(false);
@@ -153,12 +155,14 @@ export default function UserInput({
         </div>
       )}
 
-      {/* Helper text */}
-      <div className="mt-2 sm:mt-3 text-center">
-        <span className="text-xs sm:text-sm text-gray-400">
-          {value.length} / {targetWord.length} {isSentence ? 'caracteres' : 'letras'}
-        </span>
-      </div>
+      {/* Helper text - hidden in Zen mode */}
+      {!zenMode && (
+        <div className="mt-2 sm:mt-3 text-center">
+          <span className="text-xs sm:text-sm text-gray-400">
+            {value.length} / {targetWord.length} {isSentence ? 'caracteres' : 'letras'}
+          </span>
+        </div>
+      )}
     </div>
   );
 }

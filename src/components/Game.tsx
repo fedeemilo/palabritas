@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { WordsData, Level } from '@/types'
 import { useGameProgress } from '@/hooks/useGameProgress'
 import { useSound } from '@/hooks/useSound'
@@ -189,38 +190,39 @@ export default function Game() {
                     disabled={showSuccess || showLevelComplete}
                     onKeyCorrect={playKeyCorrect}
                     onKeyWrong={playKeyWrong}
+                    zenMode={zenMode}
                 />
 
                 {/* Navigation buttons */}
-                <div className="flex gap-3 sm:gap-4 mt-2 sm:mt-4">
+                <div className="flex gap-4 sm:gap-6 mt-2 sm:mt-4">
                     <button
                         onClick={handlePreviousWord}
                         disabled={currentWordIndex === 0}
                         className={`
-              px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-lg font-medium rounded-xl
-              transition-all duration-200
-              ${
-                  currentWordIndex === 0
-                      ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200 cursor-pointer active:scale-95'
-              }
-            `}
+                            p-3 sm:p-4 rounded-full transition-all duration-200
+                            ${
+                                currentWordIndex === 0
+                                    ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
+                                    : 'bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700 cursor-pointer active:scale-95'
+                            }
+                        `}
                         aria-label="Palabra anterior"
                     >
-                        ← Anterior
+                        <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
                     </button>
 
                     <button
                         onClick={handleNextWord}
                         className="
-              px-4 py-2 sm:px-6 sm:py-3 text-base sm:text-lg font-medium rounded-xl
-              bg-blue-500 text-white
-              hover:bg-blue-600 transition-all duration-200
-              cursor-pointer active:scale-95
-            "
+                            p-3 sm:p-4 rounded-full
+                            bg-blue-100 text-blue-600
+                            hover:bg-blue-200 hover:text-blue-700
+                            transition-all duration-200
+                            cursor-pointer active:scale-95
+                        "
                         aria-label="Siguiente palabra"
                     >
-                        Siguiente →
+                        <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
                     </button>
                 </div>
             </div>
