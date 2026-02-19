@@ -175,7 +175,7 @@ export default function Game() {
             {/* Main content - centered vertically */}
             <div className="flex flex-col items-center w-full max-w-xl gap-4 sm:gap-6 md:gap-8">
                 {/* Emoji with completed badge */}
-                <div ref={imageRef} className={`relative transition-transform duration-300 ${isKeyboardVisible ? 'scale-75' : ''}`}>
+                <div ref={imageRef} className={`relative transition-transform duration-300 ${isKeyboardVisible ? 'scale-85' : ''}`}>
                     <EmojiDisplay emoji={currentWord.emoji} word={currentWord.word} level={currentLevel} />
 
                     {/* Completed badge - hidden in Zen mode */}
@@ -203,38 +203,40 @@ export default function Game() {
                     zenMode={zenMode}
                 />
 
-                {/* Navigation buttons */}
-                <div className="flex gap-4 sm:gap-6 mt-2 sm:mt-4">
-                    <button
-                        onClick={handlePreviousWord}
-                        disabled={currentWordIndex === 0}
-                        className={`
-                            p-3 sm:p-4 rounded-full transition-all duration-200
-                            ${
-                                currentWordIndex === 0
-                                    ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
-                                    : 'bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700 cursor-pointer active:scale-95'
-                            }
-                        `}
-                        aria-label="Palabra anterior"
-                    >
-                        <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
-                    </button>
+                {/* Navigation buttons - hidden when keyboard is open */}
+                {!isKeyboardVisible && (
+                    <div className="flex gap-4 sm:gap-6 mt-2 sm:mt-4">
+                        <button
+                            onClick={handlePreviousWord}
+                            disabled={currentWordIndex === 0}
+                            className={`
+                                p-3 sm:p-4 rounded-full transition-all duration-200
+                                ${
+                                    currentWordIndex === 0
+                                        ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
+                                        : 'bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700 cursor-pointer active:scale-95'
+                                }
+                            `}
+                            aria-label="Palabra anterior"
+                        >
+                            <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
+                        </button>
 
-                    <button
-                        onClick={handleNextWord}
-                        className="
-                            p-3 sm:p-4 rounded-full
-                            bg-blue-100 text-blue-600
-                            hover:bg-blue-200 hover:text-blue-700
-                            transition-all duration-200
-                            cursor-pointer active:scale-95
-                        "
-                        aria-label="Siguiente palabra"
-                    >
-                        <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
-                    </button>
-                </div>
+                        <button
+                            onClick={handleNextWord}
+                            className="
+                                p-3 sm:p-4 rounded-full
+                                bg-blue-100 text-blue-600
+                                hover:bg-blue-200 hover:text-blue-700
+                                transition-all duration-200
+                                cursor-pointer active:scale-95
+                            "
+                            aria-label="Siguiente palabra"
+                        >
+                            <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
+                        </button>
+                    </div>
+                )}
             </div>
 
             {/* Success animation overlay */}
