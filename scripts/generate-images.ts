@@ -43,7 +43,7 @@ const translations: Record<string, string> = {
     "abri la ventana": "an open window with fresh air coming in",
     "hoy vamos a pasear al perro": "a family walking their dog in the park",
     "quiero comer pizza con mi familia": "a family eating pizza together",
-    "el sol sale por la manana": "a beautiful sunrise over a landscape",
+    "el sol sale temprano": "a beautiful sunrise over a landscape",
     "mi gato duerme en la cama": "a cat sleeping peacefully on a bed",
     "vamos a comprar al supermercado": "a family shopping with a cart at the supermarket",
     "me gusta jugar en el jardin": "a child playing happily in a garden",
