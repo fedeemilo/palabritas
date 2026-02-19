@@ -47,7 +47,7 @@ const translations: Record<string, string> = {
     "mi gato duerme en la cama": "a cat sleeping peacefully on a bed",
     "vamos a comprar al supermercado": "a family shopping with a cart at the supermarket",
     "me gusta jugar en el jardin": "a child playing happily in a garden",
-    "manana vamos a la plaza": "a family planning to visit a plaza",
+    "vamos a ir a esa plaza": "a family planning to visit a plaza",
     "mi perro corre muy rapido": "a dog running fast and happy",
     "quiero tomar leche con galletitas": "milk and cookies on a table",
     "hoy hace un dia muy lindo": "a beautiful sunny day with blue sky"
