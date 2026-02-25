@@ -8,8 +8,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Palabritas - Aprende a escribir",
-  description: "Aplicación educativa para aprender a escribir palabras en español",
+  title: "Juegos Educativos",
+  description: "Juegos educativos para aprender jugando",
 };
 
 export default function RootLayout({

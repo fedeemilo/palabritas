@@ -2,6 +2,52 @@
 
 Todos los cambios notables de este proyecto serán documentados en este archivo.
 
+## [2.0.0] - 2026-02-25
+
+### Agregado
+
+- **Pantalla de inicio (Home)**
+  - Nuevo home minimalista con selector de juegos
+  - Tarjetas grandes con emoji, nombre y descripción por cada juego
+  - Diseño responsive (1 columna en móvil, 2 en desktop)
+
+- **Juego de Matemáticas** (`/matematicas`)
+  - Sumas y restas para niños de 4–6 años
+  - Ejercicios aleatorios con 3 opciones de respuesta
+  - Visualización con puntos de colores (conteo visual)
+  - Animación secuencial de puntos al generar ejercicio (pop-in uno a uno)
+  - Animación de merge al acertar: suma une puntos en verde, resta elimina puntos y muestra resultado en verde
+  - Feedback visual: botón verde al acertar, shake rojo al errar
+  - Delay de 700ms antes del "Muy bien!" para ver el resultado
+  - 3 niveles: sumas hasta 5, sumas hasta 10, restas simples
+  - Progreso persistente en localStorage
+  - Desbloqueo secuencial de niveles
+  - Auto-avance al siguiente nivel tras 3 segundos
+  - Selector de nivel con barra de progreso ámbar
+  - Botón Home para volver al inicio
+  - Reutiliza sonidos, animaciones de éxito y modal de nivel completo
+
+### Cambiado
+
+- **Reestructuración de rutas**
+  - Home (`/`) ahora es el selector de juegos
+  - Palabritas movido a `/palabritas`
+  - Metadata del layout actualizada a "Juegos Educativos"
+
+- **Palabritas: botón Home**
+  - Integrado en el selector de niveles (esquina superior izquierda)
+  - Ícono Home de Lucide React, mismo estilo que el dropdown
+
+### Técnico
+
+- Nueva estructura: `src/components/matematicas/` para componentes del juego de matemáticas
+- Nuevo archivo de datos: `src/data/mathLevels.ts` (config de niveles + generador de ejercicios)
+- Nuevo hook: `useMathProgress` para progreso independiente de matemáticas
+- Nuevas animaciones CSS: `dot-pop` para puntos del juego de matemáticas
+- Arquitectura modular: agregar niveles es solo sumar un objeto al array `MATH_LEVELS`
+
+---
+
 ## [1.4.2] - 2026-02-19
 
 ### Mejorado

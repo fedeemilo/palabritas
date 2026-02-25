@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+import { Home } from 'lucide-react';
 import { Level } from '@/types';
 
 interface LevelSelectorProps {
@@ -27,7 +29,15 @@ export default function LevelSelector({
 }: LevelSelectorProps) {
   return (
     <div className="fixed top-4 left-4 flex flex-col gap-2">
-      <select
+      <div className="flex items-center gap-2">
+        <Link
+          href="/"
+          className="p-2.5 rounded-xl bg-white border-2 border-gray-200 text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 transition-all duration-200 active:scale-95 shrink-0"
+          aria-label="Volver al inicio"
+        >
+          <Home className="w-5 h-5" />
+        </Link>
+        <select
         value={currentLevel}
         onChange={(e) => {
           const level = e.target.value as Level;
@@ -69,6 +79,7 @@ export default function LevelSelector({
           );
         })}
       </select>
+      </div>
 
       {/* Progress bar for current level */}
       <div className="w-full">
