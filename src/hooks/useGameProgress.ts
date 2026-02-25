@@ -16,6 +16,8 @@ interface GameProgress {
     nivel5: number[];
     nivel6: number[];
     nivel7: number[];
+    nivel8: number[];
+    nivel9: number[];
   };
 }
 
@@ -29,7 +31,9 @@ const DEFAULT_PROGRESS: GameProgress = {
     nivel4: [],
     nivel5: [],
     nivel6: [],
-    nivel7: []
+    nivel7: [],
+    nivel8: [],
+    nivel9: []
   }
 };
 
@@ -106,6 +110,8 @@ export function useGameProgress(wordsData: WordsData) {
     if (level === 'nivel5') return isLevelComplete('nivel4');
     if (level === 'nivel6') return isLevelComplete('nivel5');
     if (level === 'nivel7') return isLevelComplete('nivel6');
+    if (level === 'nivel8') return isLevelComplete('nivel7');
+    if (level === 'nivel9') return isLevelComplete('nivel8');
     return false;
   }, [isLevelComplete]);
 

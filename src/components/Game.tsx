@@ -18,7 +18,7 @@ import SoundToggle from './SoundToggle'
 import ZenToggle from './ZenToggle'
 import wordsData from '@/data/words.json'
 
-const LEVELS: Level[] = ['nivel1', 'nivel2', 'nivel3', 'nivel4', 'nivel5', 'nivel6', 'nivel7']
+const LEVELS: Level[] = ['nivel1', 'nivel2', 'nivel3', 'nivel4', 'nivel5', 'nivel6', 'nivel7', 'nivel8', 'nivel9']
 
 export default function Game() {
     const data = wordsData as WordsData
@@ -39,12 +39,18 @@ export default function Game() {
 
     const {
         enabled: soundEnabled,
+        letterEnabled,
         toggle: toggleSound,
-        playKeyCorrect,
+        toggleLetter,
         playKeyWrong,
         playWordComplete,
-        playLevelComplete
+        playLevelComplete,
+        playLetter,
     } = useSound()
+
+    const handleKeyCorrect = useCallback((char: string) => {
+        playLetter(char)
+    }, [playLetter])
 
     const { enabled: zenMode, toggle: toggleZen } = useZenMode()
     const isKeyboardVisible = useKeyboardVisible()
@@ -198,7 +204,7 @@ export default function Game() {
                     targetWord={currentWord.word}
                     onComplete={handleWordComplete}
                     disabled={showSuccess || showLevelComplete}
-                    onKeyCorrect={playKeyCorrect}
+                    onKeyCorrect={handleKeyCorrect}
                     onKeyWrong={playKeyWrong}
                     zenMode={zenMode}
                 />
@@ -247,15 +253,32 @@ export default function Game() {
                 show={showLevelComplete}
                 level={completedLevel}
                 onContinue={handleLevelModalContinue}
-                isLastLevel={isLastLevel && isLevelComplete('nivel6')}
+                isLastLevel={isLastLevel && isLevelComplete('nivel8')}
                 playSound={playLevelComplete}
             />
 
             {/* UI elements hidden in Zen mode */}
             {!zenMode && (
                 <>
-                    {/* Sound toggle */}
-                    <SoundToggle enabled={soundEnabled} onToggle={toggleSound} />
+                    {/* Sound toggles */}
+                    <div className="fixed bottom-4 left-4 flex gap-2">
+                        <SoundToggle enabled={soundEnabled} onToggle={toggleSound} />
+                        <button
+                            onClick={toggleLetter}
+                            className={`
+                                w-10 h-10 rounded-full flex items-center justify-center
+                                transition-colors cursor-pointer text-xs font-bold
+                                ${letterEnabled
+                                    ? 'bg-blue-100 text-blue-600 hover:bg-blue-200'
+                                    : 'bg-gray-100 text-gray-400 hover:bg-gray-200'
+                                }
+                            `}
+                            aria-label={letterEnabled ? 'Desactivar voz de letras' : 'Activar voz de letras'}
+                            title={letterEnabled ? 'Voz de letras activada' : 'Voz de letras desactivada'}
+                        >
+                            ABC
+                        </button>
+                    </div>
 
                     {/* Reset progress button */}
                     <ResetButton onReset={handleReset} />

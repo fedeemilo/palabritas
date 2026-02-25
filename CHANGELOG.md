@@ -2,6 +2,28 @@
 
 Todos los cambios notables de este proyecto serán documentados en este archivo.
 
+## [2.1.0] - 2026-02-25
+
+### Agregado
+
+- **Nuevos niveles de Palabritas (7 y 8)**
+  - Nivel 7: 10 oraciones largas con imágenes generadas con IA
+  - Nivel 8: 10 oraciones más largas y complejas con imágenes generadas con IA
+  - Total: 20 oraciones nuevas para practicar escritura
+  - El nivel Bonus (Personajes) pasa a ser nivel 9
+- **Pronunciación de letras en Palabritas**
+  - Opción "ABC" para escuchar el nombre de cada letra al escribirla
+  - Usa Web Speech API en español
+  - Toggle independiente del sonido general
+  - Pensado para niños con autismo como apoyo al aprendizaje
+
+### Cambiado
+
+- Eliminado el sonido "beep" al teclear letra correcta
+- Iconos del Home reemplazados por Lucide React (PencilLine verde, Calculator naranja)
+
+---
+
 ## [2.0.0] - 2026-02-25
 
 ### Agregado

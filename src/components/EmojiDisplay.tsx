@@ -20,8 +20,7 @@ function toFilename(text: string): string {
 
 // Determine image folder based on level
 function getImageFolder(word: string, level?: string): string {
-  if (level === 'nivel7') return 'personajes';
-  // Fallback: detect if it's a sentence (has spaces = levels 4-6) or word (levels 1-3)
+  if (level === 'nivel9') return 'personajes';
   return word.includes(' ') ? 'oraciones' : 'palabras';
 }
 

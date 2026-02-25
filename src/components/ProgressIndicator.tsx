@@ -17,7 +17,9 @@ const levelNames: Record<Level, string> = {
   nivel4: 'Nivel 4',
   nivel5: 'Nivel 5',
   nivel6: 'Nivel 6',
-  nivel7: 'Bonus'
+  nivel7: 'Nivel 7',
+  nivel8: 'Nivel 8',
+  nivel9: 'Bonus'
 };
 
 export default function ProgressIndicator({

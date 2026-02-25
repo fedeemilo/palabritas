@@ -168,7 +168,9 @@ export default function MathGame() {
         playSound={playLevelComplete}
       />
 
-      <SoundToggle enabled={soundEnabled} onToggle={toggleSound} />
+      <div className="fixed bottom-4 left-4">
+        <SoundToggle enabled={soundEnabled} onToggle={toggleSound} />
+      </div>
       <ResetButton onReset={handleReset} />
     </main>
   )

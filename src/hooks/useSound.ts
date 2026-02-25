@@ -3,111 +3,127 @@
 import { useCallback, useEffect, useState } from 'react';
 
 const STORAGE_KEY = 'palabritas_sound';
+const LETTER_STORAGE_KEY = 'palabritas_letter_sound';
 
 // Audio context singleton
 let audioContext: AudioContext | null = null;
 
 function getAudioContext(): AudioContext {
-  if (!audioContext) {
-    audioContext = new (window.AudioContext || (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
-  }
-  return audioContext;
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || (window as typeof window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+    }
+    return audioContext;
 }
 
 // Generate a simple tone
 function playTone(frequency: number, duration: number, type: OscillatorType = 'sine', volume: number = 0.3) {
-  try {
-    const ctx = getAudioContext();
+    try {
+        const ctx = getAudioContext();
 
-    // Resume context if suspended (browser autoplay policy)
-    if (ctx.state === 'suspended') {
-      ctx.resume();
+        if (ctx.state === 'suspended') {
+            ctx.resume();
+        }
+
+        const oscillator = ctx.createOscillator();
+        const gainNode = ctx.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(ctx.destination);
+
+        oscillator.type = type;
+        oscillator.frequency.setValueAtTime(frequency, ctx.currentTime);
+
+        gainNode.gain.setValueAtTime(volume, ctx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
+
+        oscillator.start(ctx.currentTime);
+        oscillator.stop(ctx.currentTime + duration);
+    } catch (e) {
+        console.warn('Audio not supported:', e);
     }
+}
 
-    const oscillator = ctx.createOscillator();
-    const gainNode = ctx.createGain();
-
-    oscillator.connect(gainNode);
-    gainNode.connect(ctx.destination);
-
-    oscillator.type = type;
-    oscillator.frequency.setValueAtTime(frequency, ctx.currentTime);
-
-    // Fade out to avoid clicking
-    gainNode.gain.setValueAtTime(volume, ctx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
-
-    oscillator.start(ctx.currentTime);
-    oscillator.stop(ctx.currentTime + duration);
-  } catch (e) {
-    console.warn('Audio not supported:', e);
-  }
+function speakLetter(char: string) {
+    try {
+        if (typeof window === 'undefined' || !window.speechSynthesis) return
+        speechSynthesis.cancel()
+        const text = char === ' ' ? 'espacio' : char.toLowerCase()
+        const utterance = new SpeechSynthesisUtterance(text)
+        utterance.lang = 'es-ES'
+        utterance.rate = 1.4
+        utterance.pitch = 1.1
+        utterance.volume = 0.9
+        speechSynthesis.speak(utterance)
+    } catch {
+        // Speech synthesis not supported
+    }
 }
 
 export function useSound() {
-  const [enabled, setEnabled] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+    const [enabled, setEnabled] = useState(false);
+    const [letterEnabled, setLetterEnabled] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
 
-  // Load preference from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved !== null) {
-      setEnabled(saved === 'true');
-    }
-    setIsLoaded(true);
-  }, []);
+    useEffect(() => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved !== null) {
+            setEnabled(saved === 'true');
+        }
+        const letterSaved = localStorage.getItem(LETTER_STORAGE_KEY);
+        if (letterSaved !== null) {
+            setLetterEnabled(letterSaved === 'true');
+        }
+        setIsLoaded(true);
+    }, []);
 
-  // Save preference to localStorage
-  useEffect(() => {
-    if (isLoaded) {
-      localStorage.setItem(STORAGE_KEY, String(enabled));
-    }
-  }, [enabled, isLoaded]);
+    useEffect(() => {
+        if (isLoaded) {
+            localStorage.setItem(STORAGE_KEY, String(enabled));
+            localStorage.setItem(LETTER_STORAGE_KEY, String(letterEnabled));
+        }
+    }, [enabled, letterEnabled, isLoaded]);
 
-  // Toggle sound on/off
-  const toggle = useCallback(() => {
-    setEnabled(prev => !prev);
-  }, []);
+    const toggle = useCallback(() => {
+        setEnabled(prev => !prev);
+    }, []);
 
-  // Sound: correct key press (short high beep)
-  const playKeyCorrect = useCallback(() => {
-    if (!enabled) return;
-    playTone(880, 0.08, 'sine', 0.2); // A5, very short
-  }, [enabled]);
+    const toggleLetter = useCallback(() => {
+        setLetterEnabled(prev => !prev);
+    }, []);
 
-  // Sound: wrong key press (low buzz)
-  const playKeyWrong = useCallback(() => {
-    if (!enabled) return;
-    playTone(200, 0.15, 'square', 0.15); // Low, slightly longer
-  }, [enabled]);
+    const playKeyWrong = useCallback(() => {
+        if (!enabled) return;
+        playTone(200, 0.15, 'square', 0.15);
+    }, [enabled]);
 
-  // Sound: word complete (happy ascending tones)
-  const playWordComplete = useCallback(() => {
-    if (!enabled) return;
+    const playWordComplete = useCallback(() => {
+        if (!enabled) return;
+        setTimeout(() => playTone(523, 0.12, 'sine', 0.25), 0);
+        setTimeout(() => playTone(659, 0.12, 'sine', 0.25), 100);
+        setTimeout(() => playTone(784, 0.2, 'sine', 0.3), 200);
+    }, [enabled]);
 
-    // Play 3 ascending tones
-    setTimeout(() => playTone(523, 0.12, 'sine', 0.25), 0);    // C5
-    setTimeout(() => playTone(659, 0.12, 'sine', 0.25), 100);  // E5
-    setTimeout(() => playTone(784, 0.2, 'sine', 0.3), 200);    // G5 (longer)
-  }, [enabled]);
+    const playLevelComplete = useCallback(() => {
+        if (!enabled) return;
+        setTimeout(() => playTone(523, 0.1, 'sine', 0.25), 0);
+        setTimeout(() => playTone(659, 0.1, 'sine', 0.25), 80);
+        setTimeout(() => playTone(784, 0.1, 'sine', 0.25), 160);
+        setTimeout(() => playTone(1047, 0.3, 'sine', 0.3), 240);
+    }, [enabled]);
 
-  // Sound: level complete (fanfare)
-  const playLevelComplete = useCallback(() => {
-    if (!enabled) return;
+    const playLetter = useCallback((char: string) => {
+        if (!letterEnabled) return
+        speakLetter(char)
+    }, [letterEnabled])
 
-    // Play celebratory sequence
-    setTimeout(() => playTone(523, 0.1, 'sine', 0.25), 0);     // C5
-    setTimeout(() => playTone(659, 0.1, 'sine', 0.25), 80);    // E5
-    setTimeout(() => playTone(784, 0.1, 'sine', 0.25), 160);   // G5
-    setTimeout(() => playTone(1047, 0.3, 'sine', 0.3), 240);   // C6 (hold)
-  }, [enabled]);
-
-  return {
-    enabled,
-    toggle,
-    playKeyCorrect,
-    playKeyWrong,
-    playWordComplete,
-    playLevelComplete
-  };
+    return {
+        enabled,
+        letterEnabled,
+        toggle,
+        toggleLetter,
+        playKeyWrong,
+        playWordComplete,
+        playLevelComplete,
+        playLetter,
+    };
 }

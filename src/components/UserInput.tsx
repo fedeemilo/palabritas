@@ -9,7 +9,7 @@ interface UserInputProps {
   targetWord: string;
   onComplete: () => void;
   disabled?: boolean;
-  onKeyCorrect?: () => void;
+  onKeyCorrect?: (char: string) => void;
   onKeyWrong?: () => void;
   zenMode?: boolean;
 }
@@ -62,9 +62,9 @@ export default function UserInput({
       setShowSpaceHint(false);
       onChange(newValue);
 
-      // Play correct key sound
       if (newValue.length > value.length) {
-        onKeyCorrect?.();
+        const typedChar = newValue.slice(-1)
+        onKeyCorrect?.(typedChar)
       }
 
       // Check if word is complete

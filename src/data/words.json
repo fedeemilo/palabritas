@@ -92,10 +92,34 @@
         { "word": "hoy hace un dia muy lindo", "emoji": "☀️😊🌈", "difficulty": 6 }
     ],
     "nivel7": [
-        { "word": "hakuna matata", "emoji": "🦁", "difficulty": 7 },
-        { "word": "yo soy el rey leon", "emoji": "🦁👑", "difficulty": 7 },
-        { "word": "soy un panda rojo", "emoji": "🐼", "difficulty": 7 },
-        { "word": "somos una manada", "emoji": "🦣", "difficulty": 7 },
-        { "word": "quiero mi bellota", "emoji": "🐿️🌰", "difficulty": 7 }
+        { "word": "mi mama me lee un cuento", "emoji": "👩📖", "difficulty": 7 },
+        { "word": "el pajaro canta en el arbol", "emoji": "🐦🌳🎵", "difficulty": 7 },
+        { "word": "quiero ir a la playa", "emoji": "🏖️🌊", "difficulty": 7 },
+        { "word": "mi papa me lleva a la escuela", "emoji": "👨🏫", "difficulty": 7 },
+        { "word": "el perro juega con la pelota", "emoji": "🐕⚽", "difficulty": 7 },
+        { "word": "vamos a hacer un castillo de arena", "emoji": "🏖️🏰", "difficulty": 7 },
+        { "word": "me gusta pintar con muchos colores", "emoji": "🎨🖌️", "difficulty": 7 },
+        { "word": "mi abuelo me cuenta una historia", "emoji": "👴📖", "difficulty": 7 },
+        { "word": "el gato juega con un ovillo", "emoji": "🐱🧶", "difficulty": 7 },
+        { "word": "quiero un vaso de jugo de naranja", "emoji": "🥤🍊", "difficulty": 7 }
+    ],
+    "nivel8": [
+        { "word": "hoy vamos a cocinar una torta de chocolate", "emoji": "🎂🍫", "difficulty": 8 },
+        { "word": "mi hermana y yo jugamos en el parque", "emoji": "👧👦🌳", "difficulty": 8 },
+        { "word": "el perro corre por el jardin muy contento", "emoji": "🐕🌿😊", "difficulty": 8 },
+        { "word": "quiero ir al zoologico a ver los animales", "emoji": "🦁🐘🦒", "difficulty": 8 },
+        { "word": "mi mama me prepara la merienda con leche", "emoji": "👩🥛🍪", "difficulty": 8 },
+        { "word": "vamos a plantar una flor en el jardin", "emoji": "🌱🌸", "difficulty": 8 },
+        { "word": "el gato duerme en la silla todo el dia", "emoji": "🐱🪑💤", "difficulty": 8 },
+        { "word": "mi papa me enseña a andar en bicicleta", "emoji": "👨🚲", "difficulty": 8 },
+        { "word": "hoy vamos a jugar con mis amigos al futbol", "emoji": "⚽👦👧", "difficulty": 8 },
+        { "word": "quiero dibujar un arcoiris con todos los colores", "emoji": "🌈🖍️", "difficulty": 8 }
+    ],
+    "nivel9": [
+        { "word": "hakuna matata", "emoji": "🦁", "difficulty": 9 },
+        { "word": "yo soy el rey leon", "emoji": "🦁👑", "difficulty": 9 },
+        { "word": "soy un panda rojo", "emoji": "🐼", "difficulty": 9 },
+        { "word": "somos una manada", "emoji": "🦣", "difficulty": 9 },
+        { "word": "quiero mi bellota", "emoji": "🐿️🌰", "difficulty": 9 }
     ]
 }
