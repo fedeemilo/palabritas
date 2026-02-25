@@ -1,20 +1,22 @@
 import Link from 'next/link'
+import { PencilLine, Calculator } from 'lucide-react'
+import type { ReactNode } from 'react'
 
-const games = [
+const games: { href: string; icon: ReactNode; title: string; description: string; color: string; shadow: string }[] = [
   {
     href: '/palabritas',
-    emoji: '✏️',
+    icon: <PencilLine className="w-12 h-12 sm:w-14 sm:h-14 text-green-500" strokeWidth={2.2} />,
     title: 'Palabritas',
     description: 'Aprendé a escribir',
-    color: 'bg-blue-100 hover:bg-blue-200 border-blue-300',
-    shadow: 'hover:shadow-blue-200/50',
+    color: 'bg-green-50 hover:bg-green-100 border-green-300',
+    shadow: 'hover:shadow-green-200/50',
   },
   {
     href: '/matematicas',
-    emoji: '🔢',
+    icon: <Calculator className="w-12 h-12 sm:w-14 sm:h-14 text-amber-500" strokeWidth={2.2} />,
     title: 'Matemáticas',
     description: 'Aprendé a sumar y restar',
-    color: 'bg-amber-100 hover:bg-amber-200 border-amber-300',
+    color: 'bg-amber-50 hover:bg-amber-100 border-amber-300',
     shadow: 'hover:shadow-amber-200/50',
   },
 ]
@@ -42,7 +44,7 @@ export default function Home() {
             `}
             aria-label={game.title}
           >
-            <span className="text-5xl sm:text-6xl">{game.emoji}</span>
+            {game.icon}
             <span className="text-xl sm:text-2xl font-semibold text-gray-800">
               {game.title}
             </span>

@@ -10,7 +10,6 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
   - Nuevo home minimalista con selector de juegos
   - Tarjetas grandes con emoji, nombre y descripción por cada juego
   - Diseño responsive (1 columna en móvil, 2 en desktop)
-
 - **Juego de Matemáticas** (`/matematicas`)
   - Sumas y restas para niños de 4–6 años
   - Ejercicios aleatorios con 3 opciones de respuesta
@@ -33,7 +32,6 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
   - Home (`/`) ahora es el selector de juegos
   - Palabritas movido a `/palabritas`
   - Metadata del layout actualizada a "Juegos Educativos"
-
 - **Palabritas: botón Home**
   - Integrado en el selector de niveles (esquina superior izquierda)
   - Ícono Home de Lucide React, mismo estilo que el dropdown
@@ -67,7 +65,6 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
   - Botones circulares con iconos Lucide (ChevronLeft/ChevronRight)
   - Colores suaves que combinan con el fondo
   - Sin texto, más minimalistas
-
 - **Modo Zen mejorado**
   - Oculta el contador de caracteres/letras debajo del input
 
@@ -101,11 +98,9 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
   - Imágenes para todas las oraciones (niveles 4-6)
   - Transición suave con fade-in al cargar imágenes
   - Scripts de generación: `generate-images.ts` y `generate-words-images.ts`
-
 - **Hint de barra espaciadora**
   - Aparece después de 3 errores cuando el próximo carácter es un espacio
   - Ayuda visual para niños que no saben usar la barra espaciadora
-
 - **Iconos Lucide React**
   - Reemplazados emojis de UI por iconos vectoriales
   - Check, Star, Trophy, Crown, Volume, etc.
@@ -117,7 +112,6 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
   - Frases más naturales y útiles para el día a día
   - "tengo hambre", "vamos al parque", "es hora de dormir", etc.
   - Mejor representación visual con imágenes generadas
-
 - **Fondo de la app**
   - Variable CSS `--background` para cambiar color en un solo lugar
   - Tono más suave, menos cansador para la vista
@@ -147,7 +141,6 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
   - Input más ancho para oraciones
   - Emojis más pequeños cuando hay múltiples
   - Contador muestra "caracteres" en oraciones, "letras" en palabras
-
 - **Selector de nivel mejorado**
   - Etiquetas "Palabras" vs "Oraciones" para diferenciar tipos de nivel
 
@@ -165,13 +158,11 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
   - Fanfarria al completar nivel
   - Botón toggle para activar/desactivar sonidos
   - Preferencia guardada en localStorage
-
 - **Modal de nivel completado**
   - Pantalla de celebración al terminar un nivel
   - Trofeo animado (corona en último nivel)
   - Estrellas con animación
   - Botón para continuar al siguiente nivel
-
 - **Auto-avance**
   - Avanza automáticamente a la siguiente palabra tras completar una
 
@@ -181,7 +172,6 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
   - Reemplazadas URLs de Flaticon por emojis nativos
   - Más confiable, sin dependencias externas
   - Carga instantánea
-
 - **Palabra "mesa" reemplazada por "pato"**
   - No existe emoji claro de mesa
   - "pato" tiene emoji representativo (🦆)
@@ -204,25 +194,21 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
   - Nivel 1: palabras cortas (3-4 letras) - sol, luna, casa, gato, etc.
   - Nivel 2: palabras medianas (5-7 letras) - pelota, helado, caballo, etc.
   - Nivel 3: palabras largas (8+ letras) - bicicleta, mariposa, computadora, etc.
-
 - **Interfaz educativa minimalista**
   - Fondo blanco puro sin distracciones
   - Tipografía Inter ultra legible
   - Palabras en MAYÚSCULAS (como aparecen en el teclado)
-
 - **Sistema de entrada interactivo**
   - Validación letra por letra en tiempo real
   - Feedback visual de error (shake + letra roja)
   - Contador de letras escritas
   - Soporte para escritura sin acentos (arbol = árbol)
-
 - **Gamificación**
   - Progreso guardado en localStorage
   - Badge de completado en palabras resueltas
   - Barra de progreso por nivel
   - Niveles bloqueados hasta completar el anterior
   - Animación de éxito con checkmark y estrellas
-
 - **Navegación**
   - Botones Anterior/Siguiente
   - Selector de nivel con indicador de progreso
@@ -235,3 +221,4 @@ Todos los cambios notables de este proyecto serán documentados en este archivo.
 - Tailwind CSS
 - 50 palabras con emojis
 - Sin backend, 100% frontend
+
