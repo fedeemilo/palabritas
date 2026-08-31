@@ -7,7 +7,7 @@ Aplicación web educativa diseñada para ayudar a niños a aprender a escribir p
 Palabritas fue creada pensando en niños que están aprendiendo a leer y escribir, con especial atención a necesidades de accesibilidad. La aplicación presenta:
 
 - **Una palabra a la vez** - Sin distracciones, foco total en la tarea
-- **Ilustraciones claras** - Imágenes simples que representan cada palabra
+- **Ilustraciones claras** - Imágenes simples que representan cada palabra (se pueden ocultar desde la configuración)
 - **Feedback inmediato** - El niño sabe al instante si escribió correctamente
 - **Sin presión de tiempo** - Cada niño avanza a su propio ritmo
 - **Progresión gradual** - De palabras cortas a palabras más complejas

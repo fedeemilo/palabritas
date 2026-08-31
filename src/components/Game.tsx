@@ -6,6 +6,7 @@ import { WordsData, Level } from '@/types'
 import { useGameProgress } from '@/hooks/useGameProgress'
 import { useSound } from '@/hooks/useSound'
 import { useZenMode } from '@/hooks/useZenMode'
+import { useShowImage } from '@/hooks/useShowImage'
 import { useKeyboardVisible } from '@/hooks/useKeyboardVisible'
 import EmojiDisplay from './EmojiDisplay'
 import WordDisplay from './WordDisplay'
@@ -15,6 +16,7 @@ import LevelCompleteModal from './LevelCompleteModal'
 import LevelSelector from './LevelSelector'
 import ResetButton from './ResetButton'
 import SoundToggle from './SoundToggle'
+import ImageToggle from './ImageToggle'
 import ZenToggle from './ZenToggle'
 import wordsData from '@/data/words.json'
 
@@ -53,15 +55,16 @@ export default function Game() {
     }, [playLetter])
 
     const { enabled: zenMode, toggle: toggleZen } = useZenMode()
+    const { enabled: showImage, toggle: toggleShowImage } = useShowImage()
     const isKeyboardVisible = useKeyboardVisible()
     const imageRef = useRef<HTMLDivElement>(null)
 
-    // Scroll to image when keyboard opens
+    // Scroll to image when keyboard opens (only if the image is visible)
     useEffect(() => {
-        if (isKeyboardVisible && imageRef.current) {
+        if (isKeyboardVisible && showImage && imageRef.current) {
             imageRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
         }
-    }, [isKeyboardVisible])
+    }, [isKeyboardVisible, showImage])
 
     const [userInput, setUserInput] = useState('')
     const [showSuccess, setShowSuccess] = useState(false)
@@ -180,22 +183,33 @@ export default function Game() {
 
             {/* Main content - centered vertically */}
             <div className="flex flex-col items-center w-full max-w-xl gap-4 sm:gap-6 md:gap-8">
-                {/* Emoji with completed badge */}
-                <div ref={imageRef} className={`relative transition-transform duration-300 ${isKeyboardVisible ? 'scale-85' : ''}`}>
-                    <EmojiDisplay emoji={currentWord.emoji} word={currentWord.word} level={currentLevel} />
+                {/* Image with completed badge — hidden when "sin imagen" is on */}
+                {showImage && (
+                    <div ref={imageRef} className={`relative transition-transform duration-300 ${isKeyboardVisible ? 'scale-85' : ''}`}>
+                        <EmojiDisplay emoji={currentWord.emoji} word={currentWord.word} level={currentLevel} />
 
-                    {/* Completed badge - hidden in Zen mode */}
-                    {!zenMode && isCurrentCompleted && (
-                        <div className="absolute -top-2 -right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
-                            <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {/* Completed badge - hidden in Zen mode */}
+                        {!zenMode && isCurrentCompleted && (
+                            <div className="absolute -top-2 -right-2 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
+                                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {/* Target word — completed badge moves here when the image is hidden */}
+                <div className="relative">
+                    <WordDisplay word={currentWord.word} />
+                    {!showImage && !zenMode && isCurrentCompleted && (
+                        <div className="absolute -top-1 -right-3 sm:-right-4 w-8 h-8 sm:w-10 sm:h-10 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
+                            <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                             </svg>
                         </div>
                     )}
                 </div>
-
-                {/* Target word */}
-                <WordDisplay word={currentWord.word} />
 
                 {/* User input */}
                 <UserInput
@@ -263,6 +277,7 @@ export default function Game() {
                     {/* Sound toggles */}
                     <div className="fixed bottom-4 left-4 flex gap-2">
                         <SoundToggle enabled={soundEnabled} onToggle={toggleSound} />
+                        <ImageToggle enabled={showImage} onToggle={toggleShowImage} />
                         <button
                             onClick={toggleLetter}
                             className={`

@@ -2,6 +2,18 @@
 
 Todos los cambios notables de este proyecto serán documentados en este archivo.
 
+## [2.2.0] - 2026-08-31
+
+### Agregado
+
+- **Modo sin imagen en Palabritas**
+  - Toggle en la barra de configuración (junto a sonido y voz de letras) para ocultar la ilustración
+  - Quedan visibles la palabra, el input y el resto de controles
+  - Preferencia persistente en localStorage
+  - La insignia de palabra completada se muestra junto a la palabra cuando la imagen está oculta
+
+---
+
 ## [2.1.0] - 2026-02-25
 
 ### Agregado
